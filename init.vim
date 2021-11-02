@@ -1,3 +1,4 @@
+let mapleader = ";"
 
 let g:ConqueGdb_GdbExe = 'arm-none-eabi-gdb'
 
@@ -23,6 +24,7 @@ Plug 'jlanzarotta/bufexplorer'
 ""Editing
 Plug 'tpope/vim-commentary'
 "Plug 'mrtazz/DoxygenToolkit.vim'
+Plug 'tpope/vim-surround'
 
 Plug 'kana/vim-operator-user'
 "Plug 'rhysd/vim-clang-format'
@@ -72,12 +74,28 @@ map <C-b> :BufExplorer<CR> " Explore buffers
 map <C-K> :bnext<CR> " Next buffer!
 map <C-J> :bprev<CR> " Prev buffer!
 
+" mehbark added this, bracket and braces and stuff completion
+" https://coderwall.com/p/h1dv0g/completion-for-parentheses-braces-and-brackets-in-vim
+inoremap { {}<left>
+inoremap {{ {
+inoremap {} {}
+inoremap {<cr> {<cr>}<esc>O
+inoremap [ []<left>
+inoremap [[ [
+inoremap [] []
+inoremap ( ()<left>
+inoremap (( (
+inoremap () ()
+inoremap " ""<left>
+inoremap "" ""
+inoremap ' ''<left>
+inoremap '' ''
 
 "===== Airline ====="
 set ttimeoutlen=50
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='luna'
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -98,12 +116,21 @@ au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 " different color schemes depending on the file type
 syntax enable
 "let g:rehash256 = 1
-colorscheme molokai
+colorscheme gruvbox
 
 
 "===== NERDTree ====="
 "Auto close if only NERDTree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"Open nerd tree if no cl argument supplied
+function! StartUp()
+    if 0 == argc()
+        NERDTree ./
+    end
+endfunction
+
+autocmd VimEnter * call StartUp()
 
 "toggle on Ctrl+n
 map <C-n> :NERDTreeToggle <cr>
@@ -162,7 +189,7 @@ set lazyredraw
 " set Colour support so airline works
 set t_Co=256
 " set mouse activated
-set mouse=
+set mouse=a
 set clipboard=unnamedplus
 " Include stdlib dirs for 'gf' command. Also include all subdir in
 " workingfolder
