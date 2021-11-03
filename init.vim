@@ -95,7 +95,7 @@ inoremap '' ''
 set ttimeoutlen=50
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -224,6 +224,8 @@ set hidden
 set autoread
 " Better default for yanking
 :map Y y$
+" Set yank highlight to something reasonable
+let g:highlightedyank_highlight_duration = 150
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
