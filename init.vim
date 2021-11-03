@@ -73,6 +73,7 @@ nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 map <C-b> :BufExplorer<CR> " Explore buffers
 map <C-K> :bnext<CR> " Next buffer!
 map <C-J> :bprev<CR> " Prev buffer!
+map <C-c> :Commentary<CR> " Toggle comment on this line
 
 " mehbark added this, bracket and braces and stuff completion
 " https://coderwall.com/p/h1dv0g/completion-for-parentheses-braces-and-brackets-in-vim
@@ -126,16 +127,17 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "Open nerd tree if no cl argument supplied
 function! StartUp()
     if 0 == argc()
-        NERDTree ./
+        NERDTree .
     end
 endfunction
+let g:NERDTreeWinPos = 'right'
 
 autocmd VimEnter * call StartUp()
 
 "toggle on Ctrl+n
 map <C-n> :NERDTreeToggle <cr>
 
-":let g:NERDTreeWinSize=60
+" let g:NERDTreeWinSize=60
 
 
 "===== Rust ====="
