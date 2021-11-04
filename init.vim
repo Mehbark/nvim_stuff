@@ -98,8 +98,8 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+" let g:airline_left_sep=''
+" let g:airline_right_sep=''
 let g:airline#extensions#whitespace#checks = [ 'indent' ]
 
 " Map f4 to switch header/source for c projects
@@ -163,6 +163,11 @@ set foldmethod=syntax
 set foldcolumn=1
 " automatically fold larger files, for small ones, it doesn't matter
 autocmd! BufReadPost * :if line('$') < 200 | set foldlevel=99 | else | set foldlevel=1 |endif
+" Relative line numbers in normal mode, absolute in insert (mainly for reading errors easier)
+set number
+
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
 
 
 "===== Persistent Undo ====="
